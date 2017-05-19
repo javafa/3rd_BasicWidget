@@ -47,14 +47,19 @@ public class MainActivity extends AppCompatActivity
             case R.id.btnHorse:
                 Toast.makeText(this,"이힝~", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.toggleButton:
-
-                break;
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        
+        switch(buttonView.getId()){
+            case R.id.toggleButton:
+                if(isChecked){
+                    Toast.makeText(this,"스위치가 켜졌습니다.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"꺼졌습니다.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 }
