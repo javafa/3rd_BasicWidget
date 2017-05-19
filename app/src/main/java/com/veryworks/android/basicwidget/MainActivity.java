@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity
     Button btnDog, btnPig, btnHorse;
     ToggleButton toggleButton;
     RadioGroup radioGroup;
+    SeekBar seekBar;
+    TextView seekCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
+        seekBar = (SeekBar) findViewById(R.id.seekBar2);
+        seekCount = (TextView) findViewById(R.id.seekCount);
+
         // 3. 클릭리스너 연결
         btnDog.setOnClickListener(   this   );  // 리스너에 this(뭔가)를 넘겨주면
         btnPig.setOnClickListener(this);        // 해당 이벤트가 발생시 this(뭔가)를 호출해준다.
@@ -42,6 +49,9 @@ public class MainActivity extends AppCompatActivity
         toggleButton.setOnCheckedChangeListener(this); // 체크드체인지리스너 <- ! 클릭 리스너가 아님
 
         radioGroup.setOnCheckedChangeListener(this);
+
+        seekBar.setOnSeekBarChangeListener(listener);
+
     }
 
     @Override
@@ -74,20 +84,36 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        switch(group.getId()){
-            case R.id.radioGroup:
-                switch (checkedId){
-                    case R.id.radioRed:
-                        Toast.makeText(this,"빨간불~~.", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.radioGreen:
-                        Toast.makeText(this,"초록불~~.", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.radioBlue:
-                        Toast.makeText(this,"파란불~~.", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                break;
+        if(group.getId() == R.id.radioGroup) {
+            switch (checkedId) {
+                case R.id.radioRed:
+                    Toast.makeText(this, "빨간불~~.", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.radioGreen:
+                    Toast.makeText(this, "초록불~~.", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.radioBlue:
+                    Toast.makeText(this, "파란불~~.", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
+
+    SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            seekCount.setText(progress + "");
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            //
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            //
+        }
+    };
+
 }
