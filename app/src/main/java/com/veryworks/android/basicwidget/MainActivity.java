@@ -3,9 +3,11 @@ package com.veryworks.android.basicwidget;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity
     SeekBar seekBar;
     TextView seekCount;
 
+    EditText editText;
+
+    Button btnNum, btnText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity
         btnDog = (Button) findViewById(R.id.btnDog);
         btnPig = (Button) findViewById(R.id.btnPig);
         btnHorse = (Button) findViewById(R.id.btnHorse);
+        btnNum = (Button) findViewById(R.id.btnNum);
+        btnText = (Button) findViewById(R.id.btnText);
 
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
 
@@ -41,10 +49,15 @@ public class MainActivity extends AppCompatActivity
         seekBar = (SeekBar) findViewById(R.id.seekBar2);
         seekCount = (TextView) findViewById(R.id.seekCount);
 
+        // * extra : Edit 텍스트 속성변경하기
+        editText = (EditText) findViewById(R.id.editText);
+
         // 3. 클릭리스너 연결
         btnDog.setOnClickListener(   this   );  // 리스너에 this(뭔가)를 넘겨주면
         btnPig.setOnClickListener(this);        // 해당 이벤트가 발생시 this(뭔가)를 호출해준다.
         btnHorse.setOnClickListener(this);
+        btnNum.setOnClickListener(this);
+        btnText.setOnClickListener(this);
 
         toggleButton.setOnCheckedChangeListener(this); // 체크드체인지리스너 <- ! 클릭 리스너가 아님
 
@@ -65,6 +78,12 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.btnHorse:
                 Toast.makeText(this,"이힝~", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btnText:
+                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                break;
+            case R.id.btnNum:
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
         }
     }
