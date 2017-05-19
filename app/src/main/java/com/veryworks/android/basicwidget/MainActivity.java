@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity
         seekBar = (SeekBar) findViewById(R.id.seekBar2);
         seekCount = (TextView) findViewById(R.id.seekCount);
 
-        // * extra : Edit 텍스트 속성변경하기
         editText = (EditText) findViewById(R.id.editText);
 
         // 3. 클릭리스너 연결
@@ -80,9 +79,11 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this,"이힝~", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnText:
+                // * extra : Edit 텍스트 속성변경하기
                 editText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case R.id.btnNum:
+                // * extra : Edit 텍스트 속성변경하기
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
         }
