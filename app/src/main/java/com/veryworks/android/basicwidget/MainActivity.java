@@ -1,19 +1,24 @@
 package com.veryworks.android.basicwidget;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+        implements View.OnClickListener
+                , CompoundButton.OnCheckedChangeListener
+                , RadioGroup.OnCheckedChangeListener {
 
     // 1. 위젯 변수를 선언
     Button btnDog, btnPig, btnHorse;
     ToggleButton toggleButton;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +32,16 @@ public class MainActivity extends AppCompatActivity
 
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
 
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+
         // 3. 클릭리스너 연결
         btnDog.setOnClickListener(   this   );  // 리스너에 this(뭔가)를 넘겨주면
         btnPig.setOnClickListener(this);        // 해당 이벤트가 발생시 this(뭔가)를 호출해준다.
         btnHorse.setOnClickListener(this);
 
         toggleButton.setOnCheckedChangeListener(this); // 체크드체인지리스너 <- ! 클릭 리스너가 아님
+
+        radioGroup.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -58,6 +67,25 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(this,"스위치가 켜졌습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(this,"꺼졌습니다.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        switch(group.getId()){
+            case R.id.radioGroup:
+                switch (checkedId){
+                    case R.id.radioRed:
+                        Toast.makeText(this,"빨간불~~.", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.radioGreen:
+                        Toast.makeText(this,"초록불~~.", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.radioBlue:
+                        Toast.makeText(this,"파란불~~.", Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 break;
         }
